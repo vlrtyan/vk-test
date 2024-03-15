@@ -1,0 +1,11 @@
+.fact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.fact_text {
+    max-width: calc(100% - 60px * 2);
+}
