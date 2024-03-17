@@ -18,7 +18,7 @@ function App() {
 
   return (
     <AppRoot>
-      <View activePanel={activePanel}>
+      <View activePanel={activePanel} onTransition={undefined}>
         <Panel id="main">
           <PanelHeader>Main</PanelHeader>
           <Group>
