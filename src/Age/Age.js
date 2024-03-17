@@ -9,8 +9,8 @@ function Age() {
   const [lastSearch, setLastSearch] = React.useState("");
   const [submitTimer, setSubmitTimer] = React.useState(null);
   const [error, setError] = React.useState("");
-  const isValid = error === undefined;
   const [controller, setController] = React.useState(null);
+  const isValid = error === undefined;
 
   const validation = (value) => {
     if (!value) {

@@ -1,6 +1,6 @@
 # Тестовое задание
 
-## [Приложение](https://vk-test-rl00zlu72-vlrtyans-projects.vercel.app/)
+## [Приложение](https://vk-test-five.vercel.app/)
 
 ## Стэк:
 
