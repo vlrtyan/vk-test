@@ -10,8 +10,7 @@ function Age() {
   const [submitTimer, setSubmitTimer] = React.useState(null);
   const [error, setError] = React.useState("");
   const isValid = error === undefined;
-  let controller;
-  let signal;
+  const [controller, setController] = React.useState(null);
 
   const validation = (value) => {
     if (!value) {
@@ -30,22 +29,26 @@ function Age() {
   const handleSubmit = (e) => {
     e && e.preventDefault();
     clearTimeout(submitTimer);
-    controller && controller.abort();
     if (input !== lastSearch && isValid) {
       requestAge(input);
     }
   };
 
-  const requestAge = (name) => {
-    controller = new AbortController();
-    signal = controller.signal;
-    fetch(`https://api.agify.io?name=${name}`, { signal })
-      .then((res) => res.json())
-      .then((json) => {
-        json.age === null ? setResult("No information") : setResult(json.age);
-        setLastSearch(name);
-      })
-      .catch((err) => setResult("Something went wrong"));
+  const requestAge = async (name) => {
+    controller && controller.abort();
+    const newController = new AbortController();
+    setController(newController);
+    try {
+      const res = await fetch(`https://api.agify.io?name=${name}`, {
+        signal: newController.signal,
+      });
+      const json = await res.json();
+      json.age === null ? setResult("No information") : setResult(json.age);
+      setLastSearch(name);
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      setResult("Something went wrong");
+    }
   };
 
   React.useEffect(() => {
